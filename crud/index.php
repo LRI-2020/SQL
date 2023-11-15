@@ -25,6 +25,8 @@ listenDelete();
                     <th>Birth date</th>
                     <th>Card</th>
                     <th>Card Number</th>
+                    <th>Bookings</th>
+                    <th>Tickets</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -55,6 +57,8 @@ listenDelete();
                     <th>Birth date</th>
                     <th>Card</th>
                     <th>Card Number</th>
+                    <th>Bookings</th>
+                    <th>Tickets</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -124,8 +128,14 @@ function displayClient($count = null)
         $birdthDate = $row["birthDate"];
         $card = $row["card"];
         $cardNumber = $row["cardNumber"];
+        $bookings = '<form action="bookings.php" method="POST">
+                      <button value="' . $id . '" type="submit" name="bookings" class="bookings">Bookings</button>
+                  </form>';
+        $tickets = '<form action="tickets.php" method="POST">
+                      <button value="' . $id . '" type="submit" name="tickets" class="tickets">Tickets</button>
+                  </form>';
         $delete = '<form method="POST">
-                      <button value="' . $id . '" type="submit" name="delete" class="delete">X     </button>
+                      <button value="' . $id . '" type="submit" name="delete" class="delete">X</button>
                   </form>';
         $update = '<form method="POST">
                       <button value="' . $id . '" type="submit" name="update" class="delete"> update </button>
@@ -137,6 +147,8 @@ function displayClient($count = null)
                 <td>' . $birdthDate . '</td>
                 <td>' . $card . '</td>
                 <td>' . $cardNumber . '</td>
+                <td>' . $bookings . '</td>
+                <td>' . $tickets . '</td>
                 <td>' . $update . '</td>
                 <td>' . $delete . '</td>
             </tr>
@@ -252,7 +264,6 @@ function listenDelete()
             echo deleteData($clientId);
     }
 }
-
 
 function deleteData($clientId)
 {
