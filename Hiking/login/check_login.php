@@ -40,7 +40,7 @@ function IsValidCredentials($login,$pwd){
 
     if($res->rowCount()===1){
         if($row = $res->fetch())
-            return $row['password'] === $pwd;
+            return $row['password'] === sha1($pwd);
     }
 
 
