@@ -14,9 +14,14 @@ listen();
     </head>
     <body>
     <main class="app">
+        <?php
+if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+        echo '<button><a href="./login/logout.php">Logout</a></button>';}
 
-        <button><a href="./login/login.php">Login</a></button>
-        <button><a href="./login/logout.php">Logout</a></button>
+        else{
+            echo         '<button><a href="./login/login.php">Login</a></button>';
+            }
+        ?>
 
         <table style="width:100%">
             <tr>

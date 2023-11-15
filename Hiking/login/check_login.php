@@ -1,5 +1,5 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT'].'/SQL/connect_to_weatherApp.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/connect_to_weatherApp.php');
 global $pdo;
 session_start();
 
@@ -40,8 +40,9 @@ function IsValidCredentials($login,$pwd){
 
     if($res->rowCount()===1){
         if($row = $res->fetch())
-            return $row['password'] === $pwd;
+            return $row['password'] === sha1($pwd);
     }
 
+    return false;
 
 }
