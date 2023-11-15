@@ -26,6 +26,7 @@ listenDelete();
                     <th>Booking</th>
                     <th>Number of tickets</th>
                     <th>Total Price</th>
+                    <th>Tickets</th>
                     <th>Delete</th>
                 </tr>
 
@@ -75,6 +76,9 @@ function displayBookings(){
         $booking = $row["bookingsId"];
         $price = $row["price"];
         $ticketCount = $row["numberOfTickets"];
+        $tickets =  '<form action="tickets.php" method="GET">
+                      <button value="' . $booking . '" type="submit" name="tickets" class="tickets">Tickets</button>
+                  </form>';
         $delete = '<form method="POST">
                       <button value="' . $booking . '" type="submit" name="delete" class="delete">X</button>
                   </form>';
@@ -84,6 +88,7 @@ function displayBookings(){
                 <td>' . $booking . '</td>
                 <td>' . $ticketCount . '</td>
                 <td>' . $price . '</td>
+                <td>' . $tickets . '</td>
                 <td>' . $delete . '</td>              
             </tr>
             ';
