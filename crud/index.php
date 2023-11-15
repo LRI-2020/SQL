@@ -2,6 +2,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/SQL/connect_to_weatherApp.php');
 global $pdo;
 listenUpdate();
+listenDelete();
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -243,6 +244,23 @@ function listenUpdate(){
 
 }
 
+function listenDelete()
+{
+    if (isset($_POST["delete"])) {
+
+            $clientId = $_POST["delete"];
+            echo deleteData($clientId);
+    }
+}
+
+
+function deleteData($clientId)
+{
+    global $pdo;
+    $delete = "DELETE FROM colyseum.clients WHERE id=$clientId";
+    $res = $pdo->exec($delete);
+    return ($res === 1) ? '<p> data correctly deleted </p>' : '<p> Error has occurred, data not deleted.</p>';
+}
 
 
 
