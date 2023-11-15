@@ -1,6 +1,11 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/SQL/connect_to_weatherApp.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/SQL/Hiking/login/evaluateAccess.php');
 global $pdo;
+if(!canAccess()){
+    header('location: ./index.php');
+    echo '<body onLoad="alert(\'Membre non reconnu...\')">';
+};
 listenUpdate();
 ?>
 <!DOCTYPE html>

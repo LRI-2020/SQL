@@ -1,5 +1,6 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/SQL/connect_to_weatherApp.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/SQL/Hiking/login/evaluateAccess.php');
 global $pdo;
 listen();
 
@@ -15,6 +16,7 @@ listen();
     <main class="app">
 
         <button><a href="./login/login.php">Login</a></button>
+        <button><a href="./login/logout.php">Logout</a></button>
 
         <table style="width:100%">
             <tr>
@@ -82,9 +84,19 @@ function listen()
 }
 
 function listenUpdate(){
+
     if (isset($_POST["update"])) {
         $id = $_POST["update"];
-        header("Location: ./update.php?update=$id");
+
+        if(canAccess()){
+            header("Location: ./update.php?update=$id");
+        }
+
+        else{
+            echo '<body onLoad="alert(\'You are not allowed to update a hike\')">';
+
+        }
+
     }
 
 }
@@ -94,8 +106,15 @@ function listenUpdate(){
 function listenDelete()
 {
     if (isset($_POST["delete"])) {
-        $hike = $_POST["delete"];
-        echo deleteData($hike);
+        if(canAccess()){
+            $hike = $_POST["delete"];
+            echo deleteData($hike);        }
+
+        else{
+            echo '<body onLoad="alert(\'You are not allowed to delete a hike\')">';
+
+        }
+
     }
 }
 
