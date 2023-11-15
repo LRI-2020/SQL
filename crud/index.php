@@ -1,6 +1,7 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/SQL/connect_to_weatherApp.php');
 global $pdo;
+listenUpdate();
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -23,6 +24,8 @@ global $pdo;
                     <th>Birth date</th>
                     <th>Card</th>
                     <th>Card Number</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
 
                 <?php
@@ -51,6 +54,8 @@ global $pdo;
                     <th>Birth date</th>
                     <th>Card</th>
                     <th>Card Number</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
 
                 <?php
@@ -112,11 +117,18 @@ function displayClient($count = null)
     $res = $pdo->query($query);
 
     while ($row = $res->fetch()) {
+        $id=$row["id"];
         $firstname = $row["firstName"];
         $lastName = $row["lastName"];
         $birdthDate = $row["birthDate"];
         $card = $row["card"];
         $cardNumber = $row["cardNumber"];
+        $delete = '<form method="POST">
+                      <button value="' . $id . '" type="submit" name="delete" class="delete">X     </button>
+                  </form>';
+        $update = '<form method="POST">
+                      <button value="' . $id . '" type="submit" name="update" class="delete"> update </button>
+                  </form>';
         echo '
             <tr>
                 <td>' . $firstname . '</td>
@@ -124,6 +136,8 @@ function displayClient($count = null)
                 <td>' . $birdthDate . '</td>
                 <td>' . $card . '</td>
                 <td>' . $cardNumber . '</td>
+                <td>' . $update . '</td>
+                <td>' . $delete . '</td>
             </tr>
             ';
     }
@@ -218,7 +232,16 @@ function displayShowTypes()
 
 }
 
+function listenUpdate(){
 
+    if (isset($_POST["update"])) {
+        $id = $_POST["update"];
+
+        header("Location: updateClient.php?update=$id");
+
+    }
+
+}
 
 
 

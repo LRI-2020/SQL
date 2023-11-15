@@ -62,7 +62,7 @@ listenUpdate();
 
 <?php
 function listenUpdate(){
-    echo true;
+
     if (isset($_GET["update"]) && isset($_POST["name"]) && isset($_POST["difficulty"]) && isset($_POST["distance"]) && isset($_POST["duration"]) && isset($_POST["height_difference"]) && isset($_POST["available"])) {
        echo "form is ok";
         $id = $_GET["update"];
