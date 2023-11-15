@@ -10,6 +10,10 @@ global $pdo;
         <title>Crud</title>
     </head>
     <body>
+    <header>
+        <button><a href="../crud/createClient.php">Create a new Client</a></button>
+        <button><a href="../crud/createSpectacle.php">Create a new Show</a></button>
+    </header>
     <main class="app">
         <div id="clients">
             <table>
